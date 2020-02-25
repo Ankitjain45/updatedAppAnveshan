@@ -20,6 +20,7 @@ const options={
 
 
 export default class FarmerRegister extends Component<Props> {
+
     constructor(props){
         super(props);
         this.state={
@@ -38,6 +39,7 @@ export default class FarmerRegister extends Component<Props> {
            console.log('ImagePicker Error: ', response.error);
          } else {
            const source = { uri: response.uri };
+           const fileName = {fileName:response.fileName};
 
            this.setState({
              avatarSource: source,
@@ -46,7 +48,36 @@ export default class FarmerRegister extends Component<Props> {
          }
        });
     }
+
+    register=()=> {
+
+        console.log("entered in register");
+
+        const data = new FormData();
+        data.append('id_type','pan');
+        data.append('photo', {
+          uri: 'avatarSource',
+          type: 'image/jpeg', // or photo.type
+          name: 'fileName',
+        });
+
+
+
+        fetch('http://localhost:3000/farmers/registration', {
+          method: 'post',
+          body: data,
+        }).then(res => {
+          console.log(body)
+        })
+        .catch(function(error) {
+            console.log("errorMessage: " + error.message);
+            throw error;
+        });
+
+
+    }
     render(){
+
         return(
             <View style={styles.Container}>
                 <Text style={styles.textStyle}>Select the type of ID </Text>
@@ -73,7 +104,7 @@ export default class FarmerRegister extends Component<Props> {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.registerButton }
-                    onPress={()=> Alert.alert('Registered')}>
+                    onPress={this.register}>
                     <Text style={styles.buttonTextStyle}>Register</Text>
                 </TouchableOpacity>
                 <Image source={this.state.avatarSource} style={{width:100,height:100}} />

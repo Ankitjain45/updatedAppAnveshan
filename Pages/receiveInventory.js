@@ -42,24 +42,26 @@ export default class receiveInventory extends Component<Props> {
              avatarSource: source,
            });
 
-           const data = new FormData();
-           data.append('name', 'testName'); // you can append anyone.
-           data.append('photo', {
-             uri: source,
-             type: 'image/jpeg', // or photo.type
-             name: fileName
-           });
-           console.log('data: ' + data);
-           /*fetch(url, {
-             method: 'post',
-             body: data
-           }).then(res => {
-             console.log(res)
-           });*/
-
          }
        });
     }
+    update=()=> {
+            const data = new FormData();
+            data.append('name', 'testName'); // you can append anyone.
+            data.append('photo', {
+              uri: source,
+              type: 'image/jpeg', // or photo.type
+              name: fileName,
+            });
+            /*fetch('localhost:3000/inventory/', {
+              method: 'post',
+              body: data,
+            }).then(res => {
+              console.log(res)
+            });*/
+
+
+        }
 
     render(){
         return(
@@ -72,7 +74,7 @@ export default class receiveInventory extends Component<Props> {
                  </TouchableOpacity>
 
                  <TouchableOpacity style={styles.updateButton }
-                     onPress={()=> Alert.alert('Inventory up-to-date')}>
+                     onPress={this.update}>
                      <Text style={styles.buttonTextStyle}>Update</Text>
                  </TouchableOpacity>
 

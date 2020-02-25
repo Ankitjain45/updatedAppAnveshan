@@ -20,38 +20,38 @@ export default class manageInventory extends Component {
 
       dataSource: [
         {
-          id: 1,
-          name: "Ram Prasad"
+        id: 1,
+        name: "Ram Prasad"
         },
         {
-          id: 2,
-          name: "Sunil Kumar"
+        id: 2,
+        name: "Sunil Kumar"
         },
         {
-          id: 3,
-          name: "Abdul Khan"
+        id: 3,
+        name: "Abdul Khan"
         },
         {
-          id: 4,
-          name: "Gopal Kumar",
+        id: 4,
+        name: "Gopal Kumar",
 
         },
         {
-                  id: 5,
-                  name: "Ram Prasad"
-                },
-                {
-                          id: 6,
-                          name: "Ram Prasad"
-                        },
-                        {
-                                  id: 7,
-                                  name: "Ram Prasad"
-                                },
-                                {
-                                          id: 8,
-                                          name: "Ram Prasad"
-                                        },
+        id: 5,
+        name: "Ram Prasad"
+        },
+        {
+        id: 6,
+        name: "Ram Prasad"
+        },
+        {
+        id: 7,
+        name: "Ram Prasad"
+        },
+        {
+        id: 8,
+        name: "Ram Prasad"
+        },
       ],
       cropSource: [
         {
@@ -74,12 +74,22 @@ export default class manageInventory extends Component {
       ],
       placeHolderTextFarmers: "Please select Farmer",
       placeHolderTextCrops: "Please select Crops",
-      selectedText: ""
+      selectedFarmerName: "",
+      selectedCropName: "",
+      selectedFarmerid:"",
+      selectedCropid:"",
     };
   }
-  _selectedValue(index, item) {
-    this.setState({ selectedText: item.name });
+  _selectedFarmer(index, item) {
+    this.setState({ selectedFarmerName: item.name });
+    this.setState({ selectedFarmerid: item.id });
   }
+  _selectedCrop(index, item) {
+    this.setState({ selectedCropName: item.name });
+    this.setState({ selectedCropid: item.id});
+  }
+
+
 
   uploadImageClicked=() => {
      ImagePicker.showImagePicker(options, (response) => {
@@ -98,6 +108,25 @@ export default class manageInventory extends Component {
        }
      });
   }
+      upload=()=> {
+              const data = new FormData();
+              data.append('farmer_id',selectedFarmerid);
+              data.append('crop',selectedCropid);
+              data.append('photo', {
+                uri: source,
+                type: 'image/jpeg', // or photo.type
+                name: fileName,
+              });
+              fetch('localhost:3000/bags/' + selectedCropid, {
+                method: 'post',
+                body: data,
+              }).then(res => {
+                console.log(res)
+              });
+
+
+          }
+
 
 
   render() {
@@ -121,13 +150,13 @@ export default class manageInventory extends Component {
           pickerStyle={styles.pickerStyle}
           itemSeparatorStyle={styles.itemSeparatorStyle}
           pickerItemTextStyle={styles.listTextViewStyle}
-          selectedLabel={this.state.selectedText}
+          selectedLabel={this.state.selectedFarmerName1}
           placeHolderLabel={this.state.placeHolderTextFarmers}
           selectLabelTextStyle={styles.selectLabelTextStyle}
           placeHolderTextStyle={styles.placeHolderTextStyle}
           dropDownImageStyle={styles.dropDownImageStyle}
           dropDownImage={require("../Images/drop-down-arrow.png")}
-          selectedValue={(index, item) => this._selectedValue(index, item)}
+          selectedValue={(index, item) => this._selectedFarmer(index, item)}
         />
 
 
@@ -148,13 +177,13 @@ export default class manageInventory extends Component {
           pickerStyle={styles.pickerStyle}
           itemSeparatorStyle={styles.itemSeparatorStyle}
           pickerItemTextStyle={styles.listTextViewStyle}
-          selectedLabel={this.state.selectedText}
+          selectedLabel={this.state.selectedCropName}
           placeHolderLabel={this.state.placeHolderTextCrops}
           selectLabelTextStyle={styles.selectLabelTextStyle}
           placeHolderTextStyle={styles.placeHolderTextStyle}
           dropDownImageStyle={styles.dropDownImageStyle}
           dropDownImage={require("../Images/drop-down-arrow.png")}
-          selectedValue={(index, item) => this._selectedValue(index, item)}
+          selectedValue={(index, item) => this._selectedCrop(index, item)}
         />
 
         <Text style={styles.textStyle} > Number of Bags : {this.state.slideValue}</Text>
@@ -167,7 +196,7 @@ export default class manageInventory extends Component {
          </TouchableOpacity>
 
          <TouchableOpacity style={styles.uploadButton }
-             onPress={()=> Alert.alert('Inventory up-to-date')}>
+             onPress={this.upload}>
              <Text style={styles.buttonTextStyle}>Upload</Text>
          </TouchableOpacity>
 
@@ -215,7 +244,7 @@ const styles = StyleSheet.create({
   selectLabelTextStyle: {
     color: "#000",
     textAlign: "left",
-    width: "99%",
+    width: 280,
     padding: 10,
     flexDirection: "row"
   },

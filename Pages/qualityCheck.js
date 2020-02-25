@@ -43,6 +43,25 @@ export default class qualityCheck extends Component<Props> {
          }
        });
     }
+
+    update=()=> {
+                const data = new FormData();
+                data.append('name', 'testName'); // you can append anyone.
+                data.append('photo', {
+                  uri: source,
+                  type: 'image/jpeg', // or photo.type
+                  name: fileName,
+                });
+                /*fetch('localhost:3000/inventory/', {
+                  method: 'post',
+                  body: data,
+                }).then(res => {
+                  console.log(res)
+                });*/
+
+
+            }
+
     render(){
         return(
             <View style={styles.Container}>
@@ -54,7 +73,7 @@ export default class qualityCheck extends Component<Props> {
                  </TouchableOpacity>
 
                  <TouchableOpacity style={styles.updateButton }
-                     onPress={()=> Alert.alert('Checking quality ...')}>
+                     onPress={this.update}>
                      <Text style={styles.buttonTextStyle}>Check Quality</Text>
                  </TouchableOpacity>
 

@@ -11,19 +11,18 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 const options={
-    title: 'Update Inventory',
+    title: 'Quality Check',
     takePhotoButtonTitle: 'Take photo with camera',
     chooseFromLibraryButtonTitle: 'Choose photo from library',
 }
 
 
 
-export default class receiveInventory extends Component<Props> {
+export default class qualityCheckMultiple extends Component<Props> {
     constructor(props){
         super(props);
         this.state={
             avatarSource:null,
-
         }
     }
 
@@ -37,45 +36,45 @@ export default class receiveInventory extends Component<Props> {
            console.log('ImagePicker Error: ', response.error);
          } else {
            const source = { uri: response.uri };
-           const fileName = {fileName: response.fileName};
+
            this.setState({
              avatarSource: source,
            });
-
          }
        });
     }
+
     update=()=> {
-            const data = new FormData();
-            data.append('name', 'testName'); // you can append anyone.
-            data.append('photo', {
-              uri: source,
-              type: 'image/jpeg', // or photo.type
-              name: fileName,
-            });
-            fetch('localhost:3000/inventory/', {
-              method: 'post',
-              body: data,
-            }).then(res => {
-              console.log(res)
-            });
+                const data = new FormData();
+                data.append('name', 'testName'); // you can append anyone.
+                data.append('photo', {
+                  uri: source,
+                  type: 'image/jpeg', // or photo.type
+                  name: fileName,
+                });
+                /*fetch('localhost:3000/inventory/', {
+                  method: 'post',
+                  body: data,
+                }).then(res => {
+                  console.log(res)
+                });*/
 
 
-        }
+            }
 
     render(){
         return(
             <View style={styles.Container}>
-                <Text style={styles.textStyle}>Receive Inventory </Text>
+                <Text style={styles.textStyle}>Quality Check</Text>
 
                  <TouchableOpacity style={styles.uploadButton}
                     onPress={this.uploadImageClicked}>
-                    <Text style={styles.buttonTextStyle}>Update Inventory</Text>
+                    <Text style={styles.buttonTextStyle}>Upload Image</Text>
                  </TouchableOpacity>
 
                  <TouchableOpacity style={styles.updateButton }
                      onPress={this.update}>
-                     <Text style={styles.buttonTextStyle}>Update</Text>
+                     <Text style={styles.buttonTextStyle}>Check Quality</Text>
                  </TouchableOpacity>
 
             </View>

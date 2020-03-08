@@ -11,19 +11,18 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 const options={
-    title: 'Update Inventory',
+    title: 'Order ID',
     takePhotoButtonTitle: 'Take photo with camera',
     chooseFromLibraryButtonTitle: 'Choose photo from library',
 }
 
 
 
-export default class receiveInventory extends Component<Props> {
+export default class shipping extends Component<Props> {
     constructor(props){
         super(props);
         this.state={
             avatarSource:null,
-
         }
     }
 
@@ -37,45 +36,45 @@ export default class receiveInventory extends Component<Props> {
            console.log('ImagePicker Error: ', response.error);
          } else {
            const source = { uri: response.uri };
-           const fileName = {fileName: response.fileName};
+
            this.setState({
              avatarSource: source,
            });
-
          }
        });
     }
+
     update=()=> {
-            const data = new FormData();
-            data.append('name', 'testName'); // you can append anyone.
-            data.append('photo', {
-              uri: source,
-              type: 'image/jpeg', // or photo.type
-              name: fileName,
-            });
-            fetch('localhost:3000/inventory/', {
-              method: 'post',
-              body: data,
-            }).then(res => {
-              console.log(res)
-            });
+                const data = new FormData();
+                data.append('name', 'testName'); // you can append anyone.
+                data.append('photo', {
+                  uri: source,
+                  type: 'image/jpeg', // or photo.type
+                  name: fileName,
+                });
+                /*fetch('localhost:3000/inventory/', {
+                  method: 'post',
+                  body: data,
+                }).then(res => {
+                  console.log(res)
+                });*/
 
 
-        }
+            }
 
     render(){
         return(
             <View style={styles.Container}>
-                <Text style={styles.textStyle}>Receive Inventory </Text>
+                <Text style={styles.textStyle}>Shipping</Text>
 
-                 <TouchableOpacity style={styles.uploadButton}
+                 <TouchableOpacity style={styles.uploadImageButton}
                     onPress={this.uploadImageClicked}>
-                    <Text style={styles.buttonTextStyle}>Update Inventory</Text>
+                    <Text style={styles.buttonTextStyle}>Order ID image</Text>
                  </TouchableOpacity>
 
-                 <TouchableOpacity style={styles.updateButton }
-                     onPress={this.update}>
-                     <Text style={styles.buttonTextStyle}>Update</Text>
+                 <TouchableOpacity style={styles.uploadButton }
+                     onPress={this.upload}>
+                     <Text style={styles.buttonTextStyle}>Upload</Text>
                  </TouchableOpacity>
 
             </View>
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   },
-   uploadButton:{
+   uploadImageButton:{
      backgroundColor: '#439889',
      width:200,
      height:35,
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
 
 
    },
-   updateButton:{
+   uploadButton:{
          backgroundColor:'#00695c',
          width:150,
          height:40,

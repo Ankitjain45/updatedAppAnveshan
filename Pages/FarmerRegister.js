@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
+import {Actions} from 'react-native-router-flux';
 
 const options={
     title: 'my pic app',
@@ -20,7 +21,9 @@ const options={
 
 
 export default class FarmerRegister extends Component<Props> {
-
+    manualEntryFarmer(){
+            Actions.manualEntryFarmer();
+        }
     constructor(props){
         super(props);
         this.state={
@@ -51,14 +54,14 @@ export default class FarmerRegister extends Component<Props> {
 
     register=()=> {
 
-        console.log("entered in register");
+
 
         const data = new FormData();
         data.append('id_type','pan');
         data.append('photo', {
-          uri: 'avatarSource',
+          uri: this.state.avatarSource.uri,
           type: 'image/jpeg', // or photo.type
-          name: 'fileName',
+          name:fileName.fileName,
         });
 
 
@@ -109,6 +112,10 @@ export default class FarmerRegister extends Component<Props> {
                 </TouchableOpacity>
                 <Image source={this.state.avatarSource} style={{width:100,height:100}} />
 
+                <TouchableOpacity
+                    onPress={this.manualEntryFarmer}>
+                    <Text style={styles.manualEntryLink}>Register farmer manually</Text>
+                 </TouchableOpacity>
 
 
 
@@ -159,6 +166,10 @@ const styles = StyleSheet.create({
       alignItems:'center',
 
 
+   },
+   manualEntryLink:{
+      color:'#2F7DFD',
+      fontSize:15,
    }
 
 });

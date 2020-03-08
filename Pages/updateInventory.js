@@ -26,7 +26,7 @@ export default class updateInventory extends Component{
                     placeholderTextColor='rgba(0,0,0,0.5)'
                     value={this.state.containerID}
                  />
-                 <Text style={styles.textStyle}>Please update the quantity in Liters</Text>
+                 <Text style={styles.textStyle}>Update the quantity in Liters</Text>
                  <NumericInput
                      value={this.state.quantity}
                      onChange={value => this.setState({value})}
@@ -44,7 +44,7 @@ export default class updateInventory extends Component{
                  />
 
                  <Text style={styles.textStyle}>Please enter the reason</Text>
-                 <TextInput style={styles.inputBox}
+                 <TextInput style={styles.reasonInputBox}
                      underlineColorAndroid='rgba(0,0,0,0)'
                      placeholder='Reason'
                      placeholderTextColor='rgba(0,0,0,0.5)'
@@ -86,11 +86,24 @@ const styles = StyleSheet.create({
         //backgroundColor:'rgba(0,0,0,0.3)',
         borderRadius:25,
         paddingHorizontal:16,
-        fontSize:17,
+        fontSize:13,
         borderWidth:2,
         borderColor:'#212121',
         textAlignVertical:'top',
      },
+    reasonInputBox:{
+        width:220,
+        height:90,
+        marginVertical:10,
+        //backgroundColor:'rgba(0,0,0,0.3)',
+        borderRadius:15,
+        paddingHorizontal:16,
+        fontSize:13,
+        borderWidth:1,
+        borderColor:'#212121',
+        textAlignVertical:'top',
+     },
+
       buttonTextStyle:{
           color:'#ffffff',
           fontSize:17,

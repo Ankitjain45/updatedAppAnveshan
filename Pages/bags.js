@@ -150,7 +150,7 @@ export default class manageInventory extends Component {
           pickerStyle={styles.pickerStyle}
           itemSeparatorStyle={styles.itemSeparatorStyle}
           pickerItemTextStyle={styles.listTextViewStyle}
-          selectedLabel={this.state.selectedFarmerName1}
+          selectedLabel={this.state.selectedFarmerName}
           placeHolderLabel={this.state.placeHolderTextFarmers}
           selectLabelTextStyle={styles.selectLabelTextStyle}
           placeHolderTextStyle={styles.placeHolderTextStyle}
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
            width:150,
            height:40,
            justifyContent:'center',
-           marginVertical:20,
+           marginVertical:10,
            borderRadius:20,
            alignItems:'center',
 

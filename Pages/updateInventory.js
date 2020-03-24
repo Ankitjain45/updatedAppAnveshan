@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, View, Text,StyleSheet,TouchableOpacity,TextInput,Alert,Slider } from 'react-native';
+import { Button, View, Text,StyleSheet,TouchableOpacity,TextInput,Alert,Slider, } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 
 export default class updateInventory extends Component{
@@ -14,49 +14,50 @@ export default class updateInventory extends Component{
 
 
 
-
+        Alert.alert("Updated Successfully")
      }
     render(){
         return(
-            <View style={styles.container}>
-                <Text style={styles.textStyle}>Enter the Container No.</Text>
-                <TextInput style={styles.inputBox}
-                    underlineColorAndroid='rgba(0,0,0,0)'
-                    placeholder='Container Number'
-                    placeholderTextColor='rgba(0,0,0,0.5)'
-                    value={this.state.containerID}
-                 />
-                 <Text style={styles.textStyle}>Update the quantity in Liters</Text>
-                 <NumericInput
-                     value={this.state.quantity}
-                     onChange={value => this.setState({value})}
-                     onLimitReached={(isMax,msg) => console.log(isMax,msg)}
-                     totalWidth={240}
-                     totalHeight={50}
-                     iconSize={25}
-                     step={1}
-                     valueType='real'
-                     rounded
-                     textColor='#B0228C'
-                     iconStyle={{ color: 'white' }}
-                     rightButtonBackgroundColor='#00695c'
-                     leftButtonBackgroundColor='#00695c'
-                 />
 
-                 <Text style={styles.textStyle}>Please enter the reason</Text>
-                 <TextInput style={styles.reasonInputBox}
-                     underlineColorAndroid='rgba(0,0,0,0)'
-                     placeholder='Reason'
-                     placeholderTextColor='rgba(0,0,0,0.5)'
-                     selectionColor='#4f9a94'
-                     multiline={true}
-                     value={this.state.reason}
-                  />
-                 <TouchableOpacity style={styles.registerButton }
-                     onPress={this.update}>
-                     <Text style={styles.buttonTextStyle}>Update</Text>
-                 </TouchableOpacity>
-            </View>
+                <View style={styles.container}>
+                    <Text style={styles.textStyle}>Enter the Container No.</Text>
+                    <TextInput style={styles.inputBox}
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        placeholder='Container Number'
+                        placeholderTextColor='rgba(0,0,0,0.5)'
+                        value={this.state.containerID}
+                     />
+                     <Text style={styles.textStyle}>Update the quantity in Liters</Text>
+                     <NumericInput
+                         value={this.state.quantity}
+                         onChange={value => this.setState({value})}
+                         onLimitReached={(isMax,msg) => console.log(isMax,msg)}
+                         totalWidth={240}
+                         totalHeight={50}
+                         iconSize={25}
+                         step={1}
+                         valueType='real'
+                         rounded
+                         textColor='#B0228C'
+                         iconStyle={{ color: 'white' }}
+                         rightButtonBackgroundColor='#00695c'
+                         leftButtonBackgroundColor='#00695c'
+                     />
+
+                     <Text style={styles.textStyle}>Please enter the reason</Text>
+                     <TextInput style={styles.reasonInputBox}
+                         underlineColorAndroid='rgba(0,0,0,0)'
+                         placeholder='Reason'
+                         placeholderTextColor='rgba(0,0,0,0.5)'
+                         selectionColor='#4f9a94'
+                         multiline={true}
+                         value={this.state.reason}
+                      />
+                     <TouchableOpacity style={styles.registerButton }
+                         onPress={this.update}>
+                         <Text style={styles.buttonTextStyle}>Update</Text>
+                     </TouchableOpacity>
+                </View>
 
         )
 
@@ -109,10 +110,5 @@ const styles = StyleSheet.create({
           fontSize:17,
           marginVertical:5,
         },
-
-
-
-
-
 
 })

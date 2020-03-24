@@ -9,15 +9,23 @@ import manualEntryFarmer from '../Pages/manualEntryFarmer';
 import QR_Code from '../Pages/QR_Code';
 import updateInventory from '../Pages/updateInventory';
 import qualityCheckMultiple from '../Pages/qualityCheckMultiple';
+import Login from '../Pages/Login.js';
+import Signup from '../Pages/Signup';
+import inventoryID from '../Pages/inventoryID';
+import shipping from '../Pages/shipping';
+import bags from '../Pages/bags';
+import microEntrepreneur from '../Pages/microEntrepreneur';
+import TeamAnveshan from '../Pages/TeamAnveshan';
 import Home from '../Pages/Home';
-
+import QR_scanner from '../Pages/QR_scanner';
+import orderPage from '../Pages/orderPage';
 
 export default class Routes extends Component<{}> {
     render(){
         return(
             <Router>
                 <Stack key="root">
-                  <Scene key="Home" component={Home} title="Home" initial={true} />
+                  <Scene key="Home" component={Home} title="Home"  />
                   <Scene key="receiveInventory" component={receiveInventory} title="Receive Inventory" />
                   <Scene key="FarmerRegister" component={FarmerRegister} title="Register Farmer" />
                   <Scene key="qualityCheck" component={qualityCheck} title="Quality Check" />
@@ -26,7 +34,15 @@ export default class Routes extends Component<{}> {
                   <Scene key="QR_Code" component={QR_Code} title="QR Codes" />
                   <Scene key="updateInventory" component={updateInventory} title="Update Inventory" />
                   <Scene key="qualityCheckMultiple" component={qualityCheckMultiple} title="Quality Check" />
-
+                  <Scene key="Login" component={Login} title="Login" hideNavBar={true} initial={true}/>
+                  <Scene key="Signup" component={Signup} title="Signup" hideNavBar={true} />
+                  <Scene key="bags" component={bags} title="Receive Bags" />
+                  <Scene key="shipping" component={shipping} title="Shipping" />
+                  <Scene key="inventoryID" component={inventoryID} title="Inventory ID" />
+                  <Scene key="microEntrepreneur" component={microEntrepreneur} title="Micro Entrepreneur" />
+                  <Scene key="TeamAnveshan" component={TeamAnveshan} title="Team Anveshan" />
+                  <Scene key="QR_scanner" component={QR_scanner} title="QR Scanner" />
+                  <Scene key="orderPage" component={orderPage} title="Order Page" />
                 </Stack>
              </Router>
 

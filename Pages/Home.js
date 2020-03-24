@@ -7,17 +7,11 @@ import {Actions} from 'react-native-router-flux';
 
 export default class Home extends Component {
 
-    farmer_registration(){
-        Actions.FarmerRegister();
+    microEntrepreneur(){
+        Actions.microEntrepreneur();
     }
-    manage_inventory(){
-        Actions.manageInventory();
-    }
-    receive_inventory(){
-        Actions.receiveInventory();
-    }
-    quality_check(){
-        Actions.qualityCheck();
+    inventoryID(){
+        Actions.inventoryID();
     }
 
     render(){
@@ -25,25 +19,14 @@ export default class Home extends Component {
         return(
             <View style={styles.Container}>
                   <TouchableOpacity style={styles.buttonStyle}
-                    onPress={this.farmer_registration} >
-                    <Text style={styles.textStyle}>Register Farmer </Text>
+                    onPress={this.microEntrepreneur} >
+                    <Text style={styles.textStyle}>Micro Entrepreneur </Text>
                    </TouchableOpacity>
 
                   <TouchableOpacity style={styles.buttonStyle}
-                    onPress={this.receive_inventory} >
-                    <Text style={styles.textStyle}>Receive Inventory</Text>
+                    onPress={this.inventoryID} >
+                    <Text style={styles.textStyle}>Team Anveshan</Text>
                    </TouchableOpacity>
-
-                  <TouchableOpacity style={styles.buttonStyle}
-                    onPress={this.quality_check} >
-                    <Text style={styles.textStyle}>Quality Check</Text>
-                   </TouchableOpacity>
-
-                  <TouchableOpacity style={styles.buttonStyle}
-                    onPress={this.manage_inventory} >
-                    <Text style={styles.textStyle}>Manage Inventory</Text>
-                   </TouchableOpacity>
-
 
             </View>
         )

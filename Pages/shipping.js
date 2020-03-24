@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
+import {Actions} from 'react-native-router-flux';
 
 const options={
     title: 'Order ID',
@@ -23,8 +24,12 @@ export default class shipping extends Component<Props> {
         super(props);
         this.state={
             avatarSource:null,
+            caller : 'order',
+            fileName : null
+
         }
     }
+
 
     uploadImageClicked=() => {
        ImagePicker.showImagePicker(options, (response) => {
@@ -36,21 +41,25 @@ export default class shipping extends Component<Props> {
            console.log('ImagePicker Error: ', response.error);
          } else {
            const source = { uri: response.uri };
-
+            const file = {fileName : response.uri };
            this.setState({
              avatarSource: source,
+             fileName : file
            });
          }
        });
     }
 
-    update=()=> {
+
+
+    upload=()=> {
+
                 const data = new FormData();
                 data.append('name', 'testName'); // you can append anyone.
                 data.append('photo', {
-                  uri: source,
+                  uri: this.state.avatarSource.uri,
                   type: 'image/jpeg', // or photo.type
-                  name: fileName,
+                  name: this.state.fileName.fileName,
                 });
                 /*fetch('localhost:3000/inventory/', {
                   method: 'post',
@@ -59,11 +68,12 @@ export default class shipping extends Component<Props> {
                   console.log(res)
                 });*/
 
-
+                 Actions.orderPage({call : 'orderID'});
             }
 
     render(){
         return(
+
             <View style={styles.Container}>
                 <Text style={styles.textStyle}>Shipping</Text>
 
@@ -109,6 +119,15 @@ const styles = StyleSheet.create({
 
 
    },
+  buttonStyle:{
+    backgroundColor:'#439889',
+    width:200,
+         height:55,
+         marginVertical:10,
+         borderRadius:15,
+         justifyContent:'center',
+         alignItems:'center',
+  },
    buttonTextStyle:{
      color:'#ffffff',
      fontSize:17,

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, View, Text,StyleSheet,TouchableOpacity,TextInput,Alert,Slider } from 'react-native';
+import { Button, View, Text,StyleSheet,TouchableOpacity,TextInput,Alert,Slider, } from 'react-native';
 //import RNFetchBlob from 'rn-fetch-blob';
 
 export default class QR_Code extends Component{
@@ -34,24 +34,25 @@ export default class QR_Code extends Component{
      }
     render(){
         return(
-            <View style={styles.container}>
-                <Text style={styles.textStyle}>Enter the Container No.</Text>
-                <TextInput style={styles.inputBox}
-                    underlineColorAndroid='rgba(0,0,0,0)'
-                    placeholder='Container Number'
-                    placeholderTextColor='rgba(0,0,0,0.5)'
-                    value={this.state.containerID}
-                 />
 
-                 <Text style={styles.textStyle} > Number of QR Codes : {this.state.slideValue}</Text>
-                 <Slider style={{width:"60%"}} step={1} maximumValue={100} value={this.state.slideValue} onValueChange={(slideValue) => this.setState({slideValue})} />
+                <View style={styles.container}>
+                    <Text style={styles.textStyle}>Enter the Container No.</Text>
+                    <TextInput style={styles.inputBox}
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        placeholder='Container Number'
+                        placeholderTextColor='rgba(0,0,0,0.5)'
+                        value={this.state.containerID}
+                     />
+
+                     <Text style={styles.textStyle} > Number of QR Codes : {this.state.slideValue}</Text>
+                     <Slider style={{width:"60%"}} step={1} maximumValue={100} value={this.state.slideValue} onValueChange={(slideValue) => this.setState({slideValue})} />
 
 
-                 <TouchableOpacity style={styles.registerButton }
-                     onPress={this.print}>
-                     <Text style={styles.buttonTextStyle}>Print QR Codes</Text>
-                 </TouchableOpacity>
-            </View>
+                     <TouchableOpacity style={styles.registerButton }
+                         onPress={this.print}>
+                         <Text style={styles.buttonTextStyle}>Print QR Codes</Text>
+                     </TouchableOpacity>
+                </View>
 
         )
 

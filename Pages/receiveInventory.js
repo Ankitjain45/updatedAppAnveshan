@@ -8,6 +8,7 @@ import {
   Alert,
   TextInput,
   Slider,
+
 } from 'react-native';
 import RNPicker from "rn-modal-picker";
 
@@ -114,7 +115,7 @@ export default class receiveInventory extends Component<Props> {
             data.append('quantity',  this.state.quantity);
 
 
-            fetch('http://192.168.0.102:3000/inventory/'+this.state.invID+'/', {
+            fetch(global.IP+'/inventory/'+this.state.invID+'/', {
               method: 'post',
               body: data,
             }).then(res => {
@@ -126,86 +127,83 @@ export default class receiveInventory extends Component<Props> {
 
     render(){
         return(
+
             <View style={styles.Container}>
 
+                <Text style={styles.textStyle}>Select the Micro Entrepreneur</Text>
 
-        <Text style={styles.textStyle}>Select the Micro Entrepreneur</Text>
+                <RNPicker
+                dataSource={this.state.dataSource}
+                dummyDataSource={this.state.dataSource}
+                defaultValue={false}
+                pickerTitle={"Select Micro Entrepreneur"}
+                showSearchBar={true}
+                disablePicker={false}
+                changeAnimation={"none"}
+                searchBarPlaceHolder={"Search....."}
+                showPickerTitle={true}
+                searchBarContainerStyle={this.props.searchBarContainerStyle}
+                pickerStyle={styles.pickerStyle}
+                itemSeparatorStyle={styles.itemSeparatorStyle}
+                pickerItemTextStyle={styles.listTextViewStyle}
+                selectedLabel={this.state.selectedMicroEntre_Name}
+                placeHolderLabel={this.state.placeHolderTextMicroEntrepreneur}
+                selectLabelTextStyle={styles.selectLabelTextStyle}
+                placeHolderTextStyle={styles.placeHolderTextStyle}
+                dropDownImageStyle={styles.dropDownImageStyle}
+                dropDownImage={require("../Images/drop-down-arrow.png")}
+                selectedValue={(index, item) => this._selectedMicroEntre(index, item)}
+                />
 
+                <Text style={styles.textStyle}>Choose the Crop</Text>
 
-        <RNPicker
-          dataSource={this.state.dataSource}
-          dummyDataSource={this.state.dataSource}
-          defaultValue={false}
-          pickerTitle={"Select Micro Entrepreneur"}
-          showSearchBar={true}
-          disablePicker={false}
-          changeAnimation={"none"}
-          searchBarPlaceHolder={"Search....."}
-          showPickerTitle={true}
-          searchBarContainerStyle={this.props.searchBarContainerStyle}
-          pickerStyle={styles.pickerStyle}
-          itemSeparatorStyle={styles.itemSeparatorStyle}
-          pickerItemTextStyle={styles.listTextViewStyle}
-          selectedLabel={this.state.selectedMicroEntre_Name}
-          placeHolderLabel={this.state.placeHolderTextMicroEntrepreneur}
-          selectLabelTextStyle={styles.selectLabelTextStyle}
-          placeHolderTextStyle={styles.placeHolderTextStyle}
-          dropDownImageStyle={styles.dropDownImageStyle}
-          dropDownImage={require("../Images/drop-down-arrow.png")}
-          selectedValue={(index, item) => this._selectedMicroEntre(index, item)}
-        />
+                <RNPicker
+                dataSource={this.state.cropSource}
+                dummyDataSource={this.state.cropSource}
+                defaultValue={false}
+                pickerTitle={"Select Crops"}
+                showSearchBar={true}
+                disablePicker={false}
+                changeAnimation={"none"}
+                searchBarPlaceHolder={"Search....."}
+                showPickerTitle={true}
+                searchBarContainerStyle={this.props.searchBarContainerStyle}
+                pickerStyle={styles.pickerStyle}
+                itemSeparatorStyle={styles.itemSeparatorStyle}
+                pickerItemTextStyle={styles.listTextViewStyle}
+                selectedLabel={this.state.selectedCrop_Name}
+                placeHolderLabel={this.state.placeHolderTextCrops}
+                selectLabelTextStyle={styles.selectLabelTextStyle}
+                placeHolderTextStyle={styles.placeHolderTextStyle}
+                dropDownImageStyle={styles.dropDownImageStyle}
+                dropDownImage={require("../Images/drop-down-arrow.png")}
+                selectedValue={(index, item) => this._selectedCrop(index, item)}
+                />
 
+                <Text style={styles.textStyle}>Enter the Container ID</Text>
+                <TextInput style={styles.inputBox}
+                underlineColorAndroid='rgba(0,0,0,0)'
+                placeholder='Container ID'
+                placeholderTextColor='rgba(0,0,0,0.5)'
+                onChangeText={(containerID) => { this.setState({ containerID: containerID})}}
+                keyboardType='numeric'
+                />
+                <Text style={styles.textStyle} > Volume received in Liters: {this.state.quantity}</Text>
 
-        <Text style={styles.textStyle}>Choose the Crop</Text>
+                <Slider style={{width:"60%"}} step={1} maximumValue={100} value={this.state.quantity} onValueChange={(quantity) => this.setState({quantity})} />
 
+                <TouchableOpacity style={styles.uploadButton}
+                onPress={this.uploadImageClicked}>
+                <Text style={styles.buttonTextStyle}>Take Photo</Text>
+                </TouchableOpacity>
 
-        <RNPicker
-          dataSource={this.state.cropSource}
-          dummyDataSource={this.state.cropSource}
-          defaultValue={false}
-          pickerTitle={"Select Crops"}
-          showSearchBar={true}
-          disablePicker={false}
-          changeAnimation={"none"}
-          searchBarPlaceHolder={"Search....."}
-          showPickerTitle={true}
-          searchBarContainerStyle={this.props.searchBarContainerStyle}
-          pickerStyle={styles.pickerStyle}
-          itemSeparatorStyle={styles.itemSeparatorStyle}
-          pickerItemTextStyle={styles.listTextViewStyle}
-          selectedLabel={this.state.selectedCrop_Name}
-          placeHolderLabel={this.state.placeHolderTextCrops}
-          selectLabelTextStyle={styles.selectLabelTextStyle}
-          placeHolderTextStyle={styles.placeHolderTextStyle}
-          dropDownImageStyle={styles.dropDownImageStyle}
-          dropDownImage={require("../Images/drop-down-arrow.png")}
-          selectedValue={(index, item) => this._selectedCrop(index, item)}
-        />
-
-
-        <Text style={styles.textStyle}>Enter the Container ID</Text>
-        <TextInput style={styles.inputBox}
-            underlineColorAndroid='rgba(0,0,0,0)'
-            placeholder='Container ID'
-            placeholderTextColor='rgba(0,0,0,0.5)'
-            onChangeText={(containerID) => { this.setState({ containerID: containerID})}}
-            keyboardType='numeric'
-         />
-        <Text style={styles.textStyle} > Volume received in Liters: {this.state.quantity}</Text>
-
-        <Slider style={{width:"60%"}} step={1} maximumValue={100} value={this.state.quantity} onValueChange={(quantity) => this.setState({quantity})} />
-
-         <TouchableOpacity style={styles.uploadButton}
-            onPress={this.uploadImageClicked}>
-            <Text style={styles.buttonTextStyle}>Take Photo</Text>
-         </TouchableOpacity>
-
-         <TouchableOpacity style={styles.updateButton }
-             onPress={this.update.bind(this)}>
-             <Text style={styles.buttonTextStyle}>Update</Text>
-         </TouchableOpacity>
+                <TouchableOpacity style={styles.updateButton }
+                onPress={this.update.bind(this)}>
+                <Text style={styles.buttonTextStyle}>Update</Text>
+                </TouchableOpacity>
 
             </View>
+
 
         )
     }

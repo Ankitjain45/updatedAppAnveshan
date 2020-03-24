@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+
 } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
@@ -64,20 +65,21 @@ export default class qualityCheckMultiple extends Component<Props> {
 
     render(){
         return(
-            <View style={styles.Container}>
-                <Text style={styles.textStyle}>Quality Check</Text>
 
-                 <TouchableOpacity style={styles.uploadButton}
-                    onPress={this.uploadImageClicked}>
-                    <Text style={styles.buttonTextStyle}>Upload Image</Text>
-                 </TouchableOpacity>
+                <View style={styles.Container}>
+                    <Text style={styles.textStyle}>Quality Check</Text>
 
-                 <TouchableOpacity style={styles.updateButton }
-                     onPress={this.update}>
-                     <Text style={styles.buttonTextStyle}>Check Quality</Text>
-                 </TouchableOpacity>
+                     <TouchableOpacity style={styles.uploadButton}
+                        onPress={this.uploadImageClicked}>
+                        <Text style={styles.buttonTextStyle}>Upload Image</Text>
+                     </TouchableOpacity>
 
-            </View>
+                     <TouchableOpacity style={styles.updateButton }
+                         onPress={this.update}>
+                         <Text style={styles.buttonTextStyle}>Check Quality</Text>
+                     </TouchableOpacity>
+
+                </View>
 
         )
     }

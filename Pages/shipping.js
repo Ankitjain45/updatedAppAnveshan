@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
@@ -25,8 +26,9 @@ export default class shipping extends Component<Props> {
         this.state={
             avatarSource:null,
             caller : 'order',
-            fileName : null
-
+            IDname:null,
+            IDuri:"",
+            orderID:null,
         }
     }
 
@@ -41,11 +43,12 @@ export default class shipping extends Component<Props> {
            console.log('ImagePicker Error: ', response.error);
          } else {
            const source = { uri: response.uri };
-            const file = {fileName : response.uri };
+            const fileName = {fileName : response.fileName };
            this.setState({
-             avatarSource: source,
-             fileName : file
+             IDuri: source,
+             IDname : fileName,
            });
+           console.log(this.state.IDuri.uri);
          }
        });
     }
@@ -54,39 +57,63 @@ export default class shipping extends Component<Props> {
 
     upload=()=> {
 
-                const data = new FormData();
-                data.append('name', 'testName'); // you can append anyone.
-                data.append('photo', {
-                  uri: this.state.avatarSource.uri,
-                  type: 'image/jpeg', // or photo.type
-                  name: this.state.fileName.fileName,
-                });
-                /*fetch('localhost:3000/inventory/', {
-                  method: 'post',
-                  body: data,
-                }).then(res => {
-                  console.log(res)
-                });*/
+            console.log(this.state.orderID);
+           const data = new FormData();
 
-                 Actions.orderPage({call : 'orderID'});
+           if(this.state.orderID===null){
+           data.append('orderIDphoto',{
+             uri: this.state.IDuri.uri,
+             type: 'image/jpeg', // or photo.type
+             name: this.state.IDname.fileName,
+           });
+           }
+           else{
+            data.append('orderid',this.state.orderID);
+           }
+
+           fetch(global.IP+'/farmers/registration',{
+             method: 'post',
+             body : data,
+             headers: {'Content-Type':'multipart/form-data'}
+           }).then(res => {
+             res.json().then(json=>{
+             console.log(data);
+             });
+           })
+           .catch(function(error) {
+               console.log("errorMessage: " + error.message);
+               throw error;
+           });
+
+                 Actions.orderPage({orderID:this.state.orderID});
             }
 
     render(){
         return(
 
             <View style={styles.Container}>
-                <Text style={styles.textStyle}>Shipping</Text>
 
+                    <Text style={styles.textStyle}>Enter the Order ID manually</Text>
+                    <TextInput style={styles.inputBox}
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        placeholder='Order ID'
+                        placeholderTextColor='rgba(0,0,0,0.5)'
+                        onChangeText={(orderID) => { this.setState({ orderID: orderID})}}
+                     />
+                 <Text style={{color:'rgba(0,0,0,0.5)',marginVertical:20}}>- OR -</Text>
+                 <Text style={styles.textStyle}>Click image of Order ID</Text>
                  <TouchableOpacity style={styles.uploadImageButton}
                     onPress={this.uploadImageClicked}>
-                    <Text style={styles.buttonTextStyle}>Order ID image</Text>
+                    <Text style={styles.buttonTextStyle}>Click image</Text>
                  </TouchableOpacity>
 
                  <TouchableOpacity style={styles.uploadButton }
                      onPress={this.upload}>
                      <Text style={styles.buttonTextStyle}>Upload</Text>
                  </TouchableOpacity>
+      <Image source={{uri: this.state.IDuri.uri}}
 
+       style={styles.logo}/>
             </View>
 
         )
@@ -112,6 +139,25 @@ const styles = StyleSheet.create({
      alignItems:'center',
 
    },
+     logo:{
+       width:150,
+       height:150,
+       marginTop:150,
+       marginBottom:30,
+
+     },
+    inputBox:{
+        width:200,
+        height:35,
+        marginVertical:10,
+        //backgroundColor:'rgba(0,0,0,0.3)',
+        borderRadius:25,
+        paddingHorizontal:16,
+        fontSize:13,
+        borderWidth:2,
+        borderColor:'#212121',
+        textAlignVertical:'top',
+     },
    textStyle:{
       fontSize:20,
       fontWeight:'bold',

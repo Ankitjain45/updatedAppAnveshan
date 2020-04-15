@@ -72,7 +72,7 @@ export default class qualityCheck extends Component<Props> {
     }
 
 
-    update=()=> {
+   update=()=> {
                 if(this.state.contentUri != null)
                 {
                 const data = new FormData();

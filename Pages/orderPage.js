@@ -14,13 +14,14 @@ export default class orderPage extends Component {
 
       constructor(props) {
         super(props);
+
         var views =[];
         this.onPress = this.uploadImageClicked.bind(this);
         this.state = {
             dataSource:[],
              avatarSource:[],
              view : views,
-             orderID : null
+             orderID : props.orderID,
               }
               fetch(global.IP+'/shipping/',{
                 method : 'get'

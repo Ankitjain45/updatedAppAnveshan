@@ -12,7 +12,7 @@ export default class Form extends Component {
         this.state={
             email:'',
             password:'',
-            //selectCategory:'micro',
+            selectCategory:"none",
             view : views,
             name:names,
             nameText : '',
@@ -23,8 +23,11 @@ export default class Form extends Component {
 
             <TextInput style={styles.inputBox}
                     underlineColorAndroid='rgba(0,0,0,0)'
-                    placeholder='Name'
+                    placeholder='Username'
                     placeholderTextColor='rgba(0,0,0,0.5)'
+                    textAlign='center'
+                    autoCompleteType='name'
+                    textContentType='name'
                     selectionColor='#4f9a94'
                     onChangeText={(name) => { this.setState({ nameText: name})}}
                     />
@@ -42,10 +45,12 @@ export default class Form extends Component {
                                    this.setState({selectCategory: itemValue})}
                                    itemStyle={{ backgroundColor: "grey", color: "blue", fontFamily:"Ebrima", fontSize:17 }}
                                  >
+                                 <Picker.Item label="Select category" value="none" />
                                  <Picker.Item label="Micro Entrepreneur" value="micro" />
                                  <Picker.Item label="Anveshan Team" value="team" />
 
                                </Picker>
+
                                </View>
                 );
                 this.setState({view : views})
@@ -75,7 +80,7 @@ export default class Form extends Component {
                 {
                     Actions.microEntrepreneur({idValue : this.state.id});
                 }
-                else
+            else
                 {
                     Actions.inventoryID({idValue : this.state.id});
                 }
@@ -83,8 +88,9 @@ export default class Form extends Component {
     }
     else
     {
-        console.log('Signup Pressed');
-        fetch('https://immense-beyond-16755.herokuapp.com/users/signup',{
+        console.log('Signup Pressed '+ this.state.selectCategory);
+
+        fetch(global.IP+'/users/signup',{
             method : 'post',
             headers: {
                       Accept: 'application/json',
@@ -126,7 +132,10 @@ export default class Form extends Component {
             {this.state.name}
             <TextInput style={styles.inputBox}
             underlineColorAndroid='rgba(0,0,0,0)'
-            placeholder='Email Id'
+            textAlign='center'
+            autoCompleteType='email'
+            textContentType='emailAddress'
+            placeholder='Email'
             placeholderTextColor='rgba(0,0,0,0.5)'
             selectionColor='#4f9a94'
             keyboardType='email-address'
@@ -134,6 +143,8 @@ export default class Form extends Component {
             />
             <TextInput style={styles.inputBox}
             underlineColorAndroid='rgba(0,0,0,0)'
+            textAlign='center'
+            textContentType='password'
             placeholder='Password'
             placeholderTextColor='rgba(0,0,0,0.5)'
             selectionColor='#4f9a94'
@@ -159,28 +170,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputBox:{
-    width:200,
-    height:40,
-    marginVertical:10,
+    width:300,
+    height:50,
+    marginVertical:7,
+    alignItems:'center',
     //backgroundColor:'rgba(0,0,0,0.3)',
-    borderRadius:25,
+    borderRadius:5,
     paddingHorizontal:16,
     fontSize:13,
-    borderWidth:2,
-    borderColor:'#212121',
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0.5)',
+    justifyContent:'center',
+    alignItems:'center',
   },
   button:{
-    width:200,
-
-    marginVertical:10,
-    borderRadius:25,
-    backgroundColor:'#439889',
-    paddingVertical:10,
-    alignItems:'center',
+      width:300,
+      height:50,
+      marginVertical:10,
+      borderRadius:5,
+      paddingHorizontal:16,
+      paddingVertical:14,
+      fontSize:13,
+      backgroundColor:'#00bfa5',
+      alignItems:'center',
 
   },
   textStyle:{
-      fontSize:15,
+      fontSize:17,
       fontWeight:'bold',
       marginTop:10,
 
@@ -189,6 +205,7 @@ const styles = StyleSheet.create({
   buttonText:{
     color:'#ffffff',
     fontSize:17,
+    fontWeight:'bold',
 
 
   }

@@ -62,7 +62,7 @@ export default class receiveInventory extends Component<Props> {
           selectedMicroEntre_ID:"",
           selectedCrop_ID:"",
         };
-        fetch('http://192.168.0.102:3000/micro/list',{
+        fetch(global.IP+'/micro/list',{
             method : 'get'
             }).then((response) => { return  response.json() } )
                .catch((error) => console.warn("fetch error:", error))
@@ -102,7 +102,7 @@ export default class receiveInventory extends Component<Props> {
        });
     }
     update=()=> {
-
+            console.log(this.state.dataSource);
             const data = new FormData();
             data.append('crop', this.state.selectedCrop_Name); // you can append anyone.
             data.append('Inv_Bag', {

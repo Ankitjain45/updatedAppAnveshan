@@ -34,12 +34,40 @@ export default class QR_scanner extends Component {
         onRead={this.onSuccess.bind(this)}
         showMarker={true}
         containerStyle={styles.qrContainer}
+        bottomViewStyle={styles.bottomContainer }
+        topContent={
+                      <TouchableOpacity style={styles.updateButton }
+                          >
+                          <Text style={styles.buttonTextStyle}>Capture</Text>
+                      </TouchableOpacity>}
+        bottomContent={
+                      <TouchableOpacity style={styles.updateButton }
+                          >
+                          <Text style={styles.buttonTextStyle}>Fill Manually</Text>
+                      </TouchableOpacity>
+                }
+
       />
+
+
+
     );
   }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flexGrow:1,
+        backgroundColor: '#ffffff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    bottomContainer:{
+        flexDirection:'row',
+        width:200,
+        height:50,
+
+    },
   centerText: {
     flex: 1,
     fontSize: 18,
@@ -60,8 +88,15 @@ const styles = StyleSheet.create({
   qrContainer:{
     marginTop:50,
     marginBottom:60,
-
-
-  }
+  },
+   updateButton:{
+         backgroundColor:'#00695c',
+         width:150,
+         height:40,
+         justifyContent:'center',
+         marginTop:40,
+         borderRadius:20,
+         alignItems:'center',
+      }
 });
 

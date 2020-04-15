@@ -5,14 +5,31 @@ import NumericInput from 'react-native-numeric-input';
 export default class updateInventory extends Component{
      constructor(props) {
         super(props);
+
         this.state={
             containerID:'',
             quantity:0,
+            reason:'',
+            invID : props.invID,
         }
      }
      update =() => {
 
+        console.log(this.state.quantity);
+        console.log(this.state.reason);
+            const data = new FormData();
+             // you can append anyone.
+            data.append('number', this.state.containerID);
+            data.append('newQuantity',  this.state.quantity);
+            data.append('invID', this.state.invID);
+            data.append('reason', this.state.reason);
 
+            fetch(global.IP+'/inventory/'+this.state.invID+'/'+this.state.containerID+'/', {
+              method: 'patch',
+              body: data,
+            }).then(res => {
+              console.log(res)
+            });
 
         Alert.alert("Updated Successfully")
      }
@@ -25,12 +42,11 @@ export default class updateInventory extends Component{
                         underlineColorAndroid='rgba(0,0,0,0)'
                         placeholder='Container Number'
                         placeholderTextColor='rgba(0,0,0,0.5)'
-                        value={this.state.containerID}
+                        onChangeText={(containerID) => { this.setState({ containerID: containerID})}}
                      />
                      <Text style={styles.textStyle}>Update the quantity in Liters</Text>
                      <NumericInput
-                         value={this.state.quantity}
-                         onChange={value => this.setState({value})}
+                         onChange={quantity => this.setState({quantity})}
                          onLimitReached={(isMax,msg) => console.log(isMax,msg)}
                          totalWidth={240}
                          totalHeight={50}
@@ -51,9 +67,9 @@ export default class updateInventory extends Component{
                          placeholderTextColor='rgba(0,0,0,0.5)'
                          selectionColor='#4f9a94'
                          multiline={true}
-                         value={this.state.reason}
+                         onChangeText={(reason) => { this.setState({ reason:reason})}}
                       />
-                     <TouchableOpacity style={styles.registerButton }
+                     <TouchableOpacity style={styles.updateButton }
                          onPress={this.update}>
                          <Text style={styles.buttonTextStyle}>Update</Text>
                      </TouchableOpacity>
@@ -110,5 +126,16 @@ const styles = StyleSheet.create({
           fontSize:17,
           marginVertical:5,
         },
+   updateButton:{
+         backgroundColor:'#00695c',
+         width:150,
+         height:40,
+         justifyContent:'center',
+         marginTop:40,
+         borderRadius:20,
+         alignItems:'center',
+
+
+      }
 
 })

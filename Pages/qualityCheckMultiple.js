@@ -71,7 +71,7 @@ export default class qualityCheckMultiple extends Component<Props> {
 
                      <TouchableOpacity style={styles.uploadButton}
                         onPress={this.uploadImageClicked}>
-                        <Text style={styles.buttonTextStyle}>Upload Image</Text>
+                        <Text style={styles.buttonTextStyle}>Upload Images</Text>
                      </TouchableOpacity>
 
                      <TouchableOpacity style={styles.updateButton }

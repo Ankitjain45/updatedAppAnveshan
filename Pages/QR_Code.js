@@ -5,31 +5,30 @@ import { Button, View, Text,StyleSheet,TouchableOpacity,TextInput,Alert,Slider, 
 export default class QR_Code extends Component{
      constructor(props) {
         super(props);
+        console.log(props.email);
         this.state={
             slideValue:0,
             containerID:'',
+            email:props.email,
 
         }
      }
      print =() => {
+                   const data = new FormData();
+                    // you can append anyone.
+                   data.append('number', this.state.containerID);
+                   data.append('invID', this.state.invID);
+                   data.append('to_mail_id', this.state.email);
+                   data.append('qrQuantity', this.state.sliderValue);
 
-//        RNFetchBlob
-//          .config({
-//            fileCache : true,
-//            // by adding this option, the temp files will have a file extension
-//            appendExt : 'png'
-//          })
-//          .fetch('GET', 'http://www.example.com/file/example.zip', {
-//            //some headers ..
-//          })
-//          .then((res) => {
-//            // the temp file path with file extension `png`
-//            console.log('The file saved to ', res.path())
-//            // Beware that when using a file path as Image source on Android,
-//            // you must prepend "file://"" before the file path
-//            imageView = <Image source={{ uri : Platform.OS === 'android' ? 'file://' + res.path() : '' + res.path() }}/>
-//          })
+                   fetch(global.IP+'/inventory/'+this.state.invID+'/'+this.state.containerID+'/', {
+                     method: 'post',
+                     body: data,
+                   }).then(res => {
+                     console.log(res)
+                   });
 
+               Alert.alert("QR codes mailed successfully to "+this.state.email);
 
      }
     render(){
@@ -41,7 +40,7 @@ export default class QR_Code extends Component{
                         underlineColorAndroid='rgba(0,0,0,0)'
                         placeholder='Container Number'
                         placeholderTextColor='rgba(0,0,0,0.5)'
-                        value={this.state.containerID}
+                         onChangeText={(containerID) => { this.setState({ containerID: containerID})}}
                      />
 
                      <Text style={styles.textStyle} > Number of QR Codes : {this.state.slideValue}</Text>

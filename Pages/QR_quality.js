@@ -18,8 +18,8 @@ class ProductScanRNCamera extends Component {
 	flashMode: RNCamera.Constants.FlashMode.auto,
       },
       imageURL:null,
-      uploadURL:null,
-      requestScanText:'Please scan the QR code',
+      requestScan_QR_Text:'Please scan the QR code',
+      requestScan_BAR_Text:'Please scan the Barcode',
     };
   }
 
@@ -29,7 +29,7 @@ class ProductScanRNCamera extends Component {
     console.warn(scanResult.data);
     this.setState({scannedData : scanResult.data});
     if (scanResult.data != null) {
-    this.setState({requestScanText:scanResult.type+' scanned successfully'});
+    this.setState({requestScan_QR_Text:scanResult.type+' scanned successfully'});
 
 	if (!this.barcodeCodes.includes(scanResult.data)) {
 	  this.barcodeCodes.push(scanResult.data);
@@ -72,7 +72,7 @@ class ProductScanRNCamera extends Component {
       .catch((error) => console.warn("fetch error:", error));
       this.setState({imageURL:null});
       this.setState({scannedData:null});
-      this.setState({requestScanText: 'Please scan the QR code' })
+      this.setState({requestScan_QR_Text: 'Please scan the QR code' })
 
     }
     else if (this.state.imageURL==null){
@@ -120,7 +120,8 @@ class ProductScanRNCamera extends Component {
             type={this.state.camera.type}
         />
         <View style={[styles.overlay, styles.topOverlay]}>
-	  <Text style={styles.scanScreenMessage}>{this.state.requestScanText}</Text>
+	  <Text style={styles.scanScreenMessage}>{this.state.requestScan_QR_Text}</Text>
+	  <Text style={styles.scanScreenMessage}>{this.state.requestScan_BAR_Text}</Text>
 
          <TouchableOpacity style={styles.captureIcon}
              onPress={this.receive_inventory.bind(this)}>
@@ -219,6 +220,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight:'bold',
+
   },
   fillText:{
     fontSize: 10,

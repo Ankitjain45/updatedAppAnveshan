@@ -18,7 +18,6 @@ class ProductScanRNCamera extends Component {
 	flashMode: RNCamera.Constants.FlashMode.auto,
       },
       imageURL:null,
-      uploadURL:null,
       requestScanText:'Please scan the QR code',
     };
   }

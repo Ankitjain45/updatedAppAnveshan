@@ -20,7 +20,8 @@ import Home from '../Pages/Home';
 import QR_scanner from '../Pages/QR_scanner';
 import orderPage from '../Pages/orderPage';
 import rough from '../Pages/rough';
-import qrcapture from '../Pages/qr-capture';
+import QR_receive from '../Pages/QR_receive';
+import QR_quality from '../Pages/QR_quality';
 
 export default class Routes extends Component<{}> {
     render(){
@@ -46,7 +47,8 @@ export default class Routes extends Component<{}> {
                   <Scene key="QR_scanner" component={QR_scanner} title="QR Scanner" />
                   <Scene key="orderPage" component={orderPage} title="Order Page" />
                   <Scene key="rough" component={rough} title="Rough" />
-                  <Scene key="qrcapture" component={qrcapture} title="QRcapture" />
+                  <Scene key="QR_receive" component={QR_receive} title="Receive Inventory" />
+                  <Scene key="QR_quality" component={QR_quality} title="Quality Check" />
                 </Stack>
              </Router>
 

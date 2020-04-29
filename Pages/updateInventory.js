@@ -80,8 +80,6 @@ export default class updateInventory extends Component{
 
     }
 
-
-
 }
 
 const styles = StyleSheet.create({

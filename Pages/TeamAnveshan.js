@@ -20,10 +20,10 @@ export default class Home extends Component {
         Actions.manageInventory({invID : this.state.idValue,email:this.state.email});
     }
     receive_inventory(){
-        Actions.qrcapture({invID : this.state.idValue});
+        Actions.QR_receive({invID : this.state.idValue});
     }
     quality_check(){
-        Actions.qualityCheck({invID : this.state.idValue});
+        Actions.QR_quality({invID : this.state.idValue});
     }
     shipping(){
         Actions.shipping({invID : this.state.idValue});
